@@ -1,3 +1,3 @@
 #! /bin/bash
 
-ls -F ./Databases | grep /
+ls -F | grep /
