@@ -1,54 +1,73 @@
 #! /bin/bash
-#********************** Main Menu ********************
-#echo "************** Welcome To DBMS! 😍 ***************"
-if [ -e "Databases" ]; then
-    echo "*******************************"
-    echo "Your Main Menu 😌!!"
-    echo "*******************************"
-else 
-    sudo mkdir ./Databases
-    if [ -d "Databases" ];then
-        echo "Data Base Created Successfully!!!"
+#********************** Connect to Database ********************
+
+read -p "Please, Enter Your DB name: " DBname
+if [[ $DBname =~ ^[a-zA-Z]+[a-zA-Z_0-9]+$ ]];then
+    if [[ -e $DBname ]];then
+        echo "DB Exist"
+        cd ./$DBname
+        echo "*******************************"
+        echo "Hello From Inside $DBname Database!!"
+        echo "*******************************"
+        select choice in "Create Table" "List Table" "Drop Table" "Insert Table" "Select From Table" "Delete From Table" "Update Table" "MainMenu"
+        do
+            case $choice in
+            "Create Table" )
+                echo "*****************************************"
+                echo "Create $DBname Tables!!"
+                echo "*****************************************"
+                ../../CreateTables.sh
+            ;;
+            "List Table" )
+                echo "*****************************************"
+                echo "List $DBname Tables!!"
+                echo "*****************************************"
+                ls -lF | grep -v /
+            ;;
+            "Drop Table" )
+                echo "*****************************************"
+                echo "Drop $DBname Tables!!"
+                echo "*****************************************"
+                ../../DropTable.sh
+            ;;
+            "Insert Table" )
+                echo "*****************************************"
+                echo "Insert Data in $DBname Tables!!"
+                echo "*****************************************"
+                ../../InsertData.sh 
+            ;;
+            "Select From Table" )
+                echo "*****************************************"
+                echo "Select Data from $DBname Tables!!"
+                echo "*****************************************"
+                ../../SelectFromTable.sh
+            ;;
+            "Delete From Table" )
+                echo "*****************************************"
+                echo "Delete Data from $DBname Tables!!"
+                echo "*****************************************"
+                ../../DeleteFromTable.sh
+                
+            ;;
+            "Update Table" )
+                echo "*****************************************"
+                echo "Update Data into $DBname Tables!!"
+                echo "*****************************************"
+                ../../UpdateFromTable.sh
+            ;;
+            "MainMenu" ) 
+                echo "***************** Welcome again from Main Menu!! 😍 **************"
+                exit
+            ;;
+            *)
+                echo "You Entered Invalid Choice, please try again!!"
+            esac
+        done
     else
-        echo "There's a Problem Happened, Please try again"
+        echo "DataBase Dosen't Exist!!"
+        echo  "Enter another DB"
     fi
+else
+    echo "Your Entered Invalid Database name !!!"
+    echo "Please Try Again!! Thank You 🍁"
 fi
-
-select choice in "Create DB" "ListBDs" "DropDB" "ConnectDB" "Exit"
-do 
-    case $choice in
-    "Create DB" )
-        echo "*******************************"
-        echo "Hello From Creating DataBase 🤩!!"
-        echo "*******************************"
-        source CreateDB.sh
-    ;;
-    "ListBDs" )
-        echo "*******************************"
-        echo "List Of Your DataBases are 👀 !!"
-        echo "*******************************"
-        source ListDBs.sh
-    ;;
-    "DropDB" )
-        echo "*******************************"
-        echo "Drop any Database 😞!!"
-        echo "*******************************"
-        source RemoveDB.sh
-    ;;
-    "ConnectDB" )
-        echo "*******************************"
-        echo "Connet to Table 💃!!"
-        echo "*******************************"
-        source ConnectDB.sh
-    ;;
-    "Exit" )
-        echo "*******************************"
-        echo "Thank You For Using Or System 😎!!"
-        echo "*******************************"
-        exit
-
-    ;;
-    *)
-        echo "You Enter Invalid Choice, please try again"
-    esac
-done 
