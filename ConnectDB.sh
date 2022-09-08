@@ -1,7 +1,6 @@
 #! /bin/bash
 #********************** Connect to Database ********************
 
-cd ./Databases/
 read -p "Please, Enter Your DB name: " DBname
 if [[ $DBname =~ ^[a-zA-Z]+[a-zA-Z_0-9]+$ ]];then
     if [[ -e $DBname ]];then
@@ -35,22 +34,14 @@ if [[ $DBname =~ ^[a-zA-Z]+[a-zA-Z_0-9]+$ ]];then
                 echo "*****************************************"
                 echo "Insert Data in $DBname Tables!!"
                 echo "*****************************************"
-                select mode in "Insert_mode" "Exit_mode"
-                 do 
-                    case $mode in
-                    "Insert_mode") ../../InsertData.sh ;;
-                    "Exit_mode") exit ;;
-                    esac
-                 done
-                ../../InsertData.sh
+                ../../InsertData.sh 
             ;;
             "Select From Table" )
                 echo "*****************************************"
                 echo "Select Data from $DBname Tables!!"
                 echo "*****************************************"
                 ../../SelectFromTable.sh
-                
-            ;; 
+            ;;
             "Delete From Table" )
                 echo "*****************************************"
                 echo "Delete Data from $DBname Tables!!"
