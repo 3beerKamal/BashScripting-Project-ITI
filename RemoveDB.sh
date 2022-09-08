@@ -1,6 +1,5 @@
 #! /bin/bash
 #********************** Hello From Drop Database ********************
-cd ./Databases
 read -p "Please Enter DataBase You Want to Remove it: " DB
 if [[ $DB =~ ^[a-zA-Z]+[a-zA-Z_0-9]+$ ]];then
     if [ -e $DB ];then
