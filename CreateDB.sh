@@ -2,7 +2,6 @@
 #********************** Creating Database ********************
 shopt -s extglob
 read -p "Please, Enter Your DB name: " DBname
-cd ./Databases
 if [[ -e $DBname ]];then
     echo "This Database is Exist"
     echo "****************************************"
@@ -16,3 +15,4 @@ else
        
     fi
 fi
+
